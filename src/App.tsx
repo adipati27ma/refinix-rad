@@ -20,6 +20,7 @@ import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
 import { App as AntdApp } from 'antd';
 import { Home, ForgotPassword, Login, Register } from './pages';
 import Layout from './components/layout';
+import { resources } from './config/resources';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
                 projectId: '9MWsME-ZWUrAe-pDjs8A',
                 liveMode: 'auto',
               }}
+              resources={resources}
             >
               <Routes>
                 {/* <Route index element={<WelcomePage />} /> */}
