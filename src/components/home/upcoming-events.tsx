@@ -53,7 +53,7 @@ const UpcomingEvents = () => {
           dataSource={Array.from({ length: 5 }).map((_, index) => ({
             id: index,
           }))}
-          renderItem={() => <UpcomingEventsSkeleton />}
+          renderItem={(_, index) => <UpcomingEventsSkeleton key={index} />}
         />
       ) : (
         <List

@@ -1,6 +1,7 @@
 import {
   DashboardTotalCountCard,
   DealsChart,
+  LatestActivities,
   UpcomingEvents,
 } from '@/components';
 import { Col, Row } from 'antd';
@@ -9,6 +10,7 @@ import { DASHBOARD_TOTAL_COUNTS_QUERY } from '@/graphql/queries';
 import { DashboardTotalCountsQuery } from '@/graphql/types';
 
 export const Home = () => {
+  // docs: hover the code for detailed documentation
   const { data, isLoading } = useCustom<DashboardTotalCountsQuery>({
     url: '',
     method: 'get',
@@ -49,6 +51,12 @@ export const Home = () => {
         </Col>
         <Col xs={24} sm={24} xl={16} style={{ height: '460px' }}>
           <DealsChart />
+        </Col>
+      </Row>
+
+      <Row gutter={[32, 32]} style={{ marginTop: '32px' }}>
+        <Col xs={24}>
+          <LatestActivities />
         </Col>
       </Row>
     </div>
