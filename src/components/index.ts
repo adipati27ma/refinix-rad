@@ -7,6 +7,9 @@ import KanbanColumnSkeleton from './skeleton/kanban';
 import AccordionHeaderSkeleton from './skeleton/accordion-header';
 import DashboardTotalCountCard from './home/total-count';
 import LatestActivities from './home/latest-activities';
+import { PaginationTotal } from './pagination-total';
+import { Text } from './text';
+import CustomAvatar from '@/components/custom-avatar';
 
 export {
   UpcomingEvents,
@@ -18,4 +21,7 @@ export {
   AccordionHeaderSkeleton,
   DashboardTotalCountCard,
   LatestActivities,
+  PaginationTotal,
+  Text,
+  CustomAvatar,
 };

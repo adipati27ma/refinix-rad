@@ -18,7 +18,7 @@ import routerBindings, {
 } from '@refinedev/react-router-v6';
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
 import { App as AntdApp } from 'antd';
-import { Home, ForgotPassword, Login, Register } from './pages';
+import { Home, ForgotPassword, Login, Register, CompanyList } from './pages';
 import Layout from './components/layout';
 import { resources } from './config/resources';
 
@@ -65,6 +65,7 @@ function App() {
                   }
                 >
                   <Route index element={<Home />} />
+                  <Route path="/companies" element={<CompanyList />} />
                 </Route>
               </Routes>
               <RefineKbar />
