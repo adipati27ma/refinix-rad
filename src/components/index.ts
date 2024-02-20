@@ -10,6 +10,7 @@ import LatestActivities from './home/latest-activities';
 import { PaginationTotal } from './pagination-total';
 import { Text } from './text';
 import CustomAvatar from '@/components/custom-avatar';
+import SelectOptionWithAvatar from './select-option-with-avatar';
 
 export {
   UpcomingEvents,
@@ -24,4 +25,5 @@ export {
   PaginationTotal,
   Text,
   CustomAvatar,
+  SelectOptionWithAvatar,
 };
