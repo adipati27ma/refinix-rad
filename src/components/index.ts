@@ -11,6 +11,7 @@ import { PaginationTotal } from './pagination-total';
 import { Text } from './text';
 import CustomAvatar from '@/components/custom-avatar';
 import SelectOptionWithAvatar from './select-option-with-avatar';
+import { ContactStatusTag } from '@/components/tags/contact-status-tag';
 
 export {
   UpcomingEvents,
@@ -26,4 +27,5 @@ export {
   Text,
   CustomAvatar,
   SelectOptionWithAvatar,
+  ContactStatusTag,
 };
