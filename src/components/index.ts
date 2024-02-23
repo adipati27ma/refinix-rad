@@ -12,6 +12,12 @@ import { Text } from './text';
 import CustomAvatar from '@/components/custom-avatar';
 import SelectOptionWithAvatar from './select-option-with-avatar';
 import { ContactStatusTag } from '@/components/tags/contact-status-tag';
+import { KanbanBoardContainer, KanbanBoard } from './tasks/kanban/board';
+import KanbanColumn from './tasks/kanban/column';
+import KanbanItem from './tasks/kanban/item';
+import TextIcon from './text-icon';
+import ProjectCardMemo from './tasks/kanban/card';
+import KanbanAddCardButton from './tasks/kanban/add-card-button';
 
 export {
   UpcomingEvents,
@@ -28,4 +34,11 @@ export {
   CustomAvatar,
   SelectOptionWithAvatar,
   ContactStatusTag,
+  KanbanBoardContainer,
+  KanbanBoard,
+  KanbanColumn,
+  KanbanItem,
+  ProjectCardMemo,
+  TextIcon,
+  KanbanAddCardButton,
 };
