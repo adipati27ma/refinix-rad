@@ -38,7 +38,7 @@ type ProjectCardProps = {
 const ProjectCard = ({ id, title, dueDate, users }: ProjectCardProps) => {
   const { token } = theme.useToken();
 
-  const { editTask } = useNavigation();
+  const { edit: editTask } = useNavigation();
   const { mutate: deleteTask } = useDelete();
 
   const dropdownItems = React.useMemo(() => {
@@ -98,7 +98,7 @@ const ProjectCard = ({ id, title, dueDate, users }: ProjectCardProps) => {
       <Card
         size="small"
         title={<Text ellipsis={{ tooltip: title }}>{title}</Text>}
-        onClick={() => edit()}
+        onClick={() => editTask('tasks', id, 'replace')}
         extra={
           <Dropdown
             trigger={['click']}
