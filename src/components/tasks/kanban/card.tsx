@@ -7,6 +7,7 @@ import {
   EyeOutlined,
   MoreOutlined,
 } from '@ant-design/icons';
+import { useDelete, useNavigation } from '@refinedev/core';
 import {
   Button,
   Card,
@@ -20,6 +21,7 @@ import {
 } from 'antd';
 import dayjs from 'dayjs';
 import React from 'react';
+import { resources } from '../../../config/resources';
 
 type ProjectCardProps = {
   id: string;
@@ -36,7 +38,8 @@ type ProjectCardProps = {
 const ProjectCard = ({ id, title, dueDate, users }: ProjectCardProps) => {
   const { token } = theme.useToken();
 
-  const edit = () => {};
+  const { editTask } = useNavigation();
+  const { mutate: deleteTask } = useDelete();
 
   const dropdownItems = React.useMemo(() => {
     const dropdownItems: MenuProps['items'] = [
@@ -45,7 +48,7 @@ const ProjectCard = ({ id, title, dueDate, users }: ProjectCardProps) => {
         key: '1',
         icon: <EyeOutlined />,
         onClick: () => {
-          edit();
+          editTask('tasks', id, 'replace');
         },
       },
       {
@@ -53,7 +56,15 @@ const ProjectCard = ({ id, title, dueDate, users }: ProjectCardProps) => {
         label: 'Delete Card',
         key: '2',
         icon: <DeleteOutlined />,
-        onClick: () => {},
+        onClick: () => {
+          deleteTask({
+            resource: 'tasks',
+            id,
+            meta: {
+              operation: 'task',
+            },
+          });
+        },
       },
     ];
 
