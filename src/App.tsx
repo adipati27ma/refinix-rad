@@ -27,6 +27,8 @@ import {
   CreateCompany,
   EditCompany,
   TaskList,
+  EditTask,
+  CreateTask,
 } from './pages';
 import Layout from './components/layout';
 import { resources } from './config/resources';
@@ -79,8 +81,20 @@ function App() {
                     <Route path="create" element={<CreateCompany />} />
                     <Route path="edit/:id" element={<EditCompany />} />
                   </Route>
-                  <Route path="/tasks">
-                    <Route index element={<TaskList />} />
+                  <Route
+                    path="/tasks"
+                    element={
+                      <TaskList>
+                        {/* 
+                          Renders the child route of the current route
+                          (same as before)
+                        */}
+                        <Outlet />
+                      </TaskList>
+                    }
+                  >
+                    <Route path="new" element={<CreateTask />} />
+                    <Route path="edit/:id" element={<EditTask />} />
                   </Route>
                 </Route>
               </Routes>
