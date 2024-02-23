@@ -10,40 +10,44 @@ import {
 } from '@/components';
 import { UPDATE_TASK_STAGE_MUTATION } from '@/graphql/mutations';
 import { TASKS_QUERY, TASK_STAGES_QUERY } from '@/graphql/queries';
-import { TaskStage } from '@/graphql/schema.types';
-import { TasksQuery } from '@/graphql/types';
+import { TaskStagesQuery, TasksQuery } from '@/graphql/types';
 import { DragEndEvent } from '@dnd-kit/core';
 import { useList, useNavigation, useUpdate } from '@refinedev/core';
 import { GetFieldsFromList } from '@refinedev/nestjs-query';
 import React from 'react';
 
-export const TaskList = ({ children }: React.PropsWithChildren) => {
-  const { data: stages, isLoading: isLoadingStages } = useList<TaskStage>({
-    resource: 'taskStages',
-    meta: {
-      gqlQuery: TASK_STAGES_QUERY,
-    },
-    filters: [
-      {
-        field: 'title',
-        operator: 'in',
-        value: ['TODO', 'IN PROGRESS', 'IN REVIEW', 'DONE'],
-      },
-    ],
-    sorters: [
-      {
-        field: 'createdAt',
-        order: 'asc',
-      },
-    ],
-    pagination: {
-      mode: 'off',
-    },
-  });
+type CustomTaskType = GetFieldsFromList<TasksQuery>;
+type CustomTaskStage = GetFieldsFromList<TaskStagesQuery> & {
+  tasks: CustomTaskType[];
+};
 
-  const { data: tasks, isLoading: isLoadingTasks } = useList<
-    GetFieldsFromList<TasksQuery>
-  >({
+export const TaskList = ({ children }: React.PropsWithChildren) => {
+  const { data: stages, isLoading: isLoadingStages } = useList<CustomTaskStage>(
+    {
+      resource: 'taskStages',
+      meta: {
+        gqlQuery: TASK_STAGES_QUERY,
+      },
+      filters: [
+        {
+          field: 'title',
+          operator: 'in',
+          value: ['TODO', 'IN PROGRESS', 'IN REVIEW', 'DONE'],
+        },
+      ],
+      sorters: [
+        {
+          field: 'createdAt',
+          order: 'asc',
+        },
+      ],
+      pagination: {
+        mode: 'off',
+      },
+    }
+  );
+
+  const { data: tasks, isLoading: isLoadingTasks } = useList<CustomTaskType>({
     resource: 'tasks',
     meta: {
       gqlQuery: TASKS_QUERY,
@@ -69,12 +73,12 @@ export const TaskList = ({ children }: React.PropsWithChildren) => {
     if (!tasks?.data || !stages?.data) {
       return {
         unassignedStage: [],
-        stages: [],
+        column: [],
       };
     }
 
     const unassignedStage = tasks.data.filter((task) => task.stageId === null);
-    const grouped: TaskStage[] = stages.data.map((stage) => ({
+    const grouped: CustomTaskStage[] = stages.data.map((stage) => ({
       ...stage,
       tasks: tasks.data.filter((task) => task.stageId?.toString() === stage.id),
     }));
